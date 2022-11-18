@@ -1,0 +1,19 @@
+name: 'Build Cevixe GitHub Actions'
+branding:
+  icon: 'terminal'
+  color: 'orange'
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Build Project 
+      uses: cevixe/build@v1
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      if: ${{ github.event_name == 'push'}}
+      with:
+        name: dist
+        path: dist
