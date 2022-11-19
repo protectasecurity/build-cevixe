@@ -11,9 +11,14 @@ runs:
     - name: Build Project 
       uses: cevixe/build@v1
 
+    - name: Compress Artifact
+      run: |
+        tar -czvf dist.tar.gz ./dist
+      shell: bash
+
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
       if: ${{ github.event_name == 'push'}}
+      uses: actions/upload-artifact@v3
       with:
         name: dist
-        path: dist
+        path: dist.tar.gz
